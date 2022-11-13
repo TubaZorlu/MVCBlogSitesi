@@ -1,16 +1,16 @@
-﻿using BusinessLayer.Concrete;
-using EntityLayer.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BusinessLayer.Abstract; 
 using System.Web.Mvc;
 
 namespace MvcProjeKampi.Controllers
 {
     public class CategoryController : Controller
     {
-        CategoryManager cm = new CategoryManager();
+        ICategoryService _categoryService;
+
+        public CategoryController(ICategoryService categoryService)
+        {
+            _categoryService = categoryService;
+        }
 
         public ActionResult Index()
         {
@@ -19,7 +19,7 @@ namespace MvcProjeKampi.Controllers
 
         public ActionResult GetCategoryList()
         {
-            var categoryValues = cm.GetAllBL();
+            var categoryValues = _categoryService.TGetList();
             return View(categoryValues);
         }
 
@@ -29,11 +29,5 @@ namespace MvcProjeKampi.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult AddCategory(Category p)
-        {
-            cm.CategoryAddBL(p);
-            return RedirectToAction("GetCategoryList");
-        }
     }
 }
