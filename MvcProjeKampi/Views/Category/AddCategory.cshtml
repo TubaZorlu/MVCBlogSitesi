@@ -1,4 +1,4 @@
-﻿
+﻿@model EntityLayer.Concrete.Category
 @{
     Layout = null;
 }
@@ -6,14 +6,29 @@
 
 <h1>Yeni Kategori Kelme Sayfası</h1>
 <br />
-Hoş Geldiniz
 
-<form class="form-group" method="post">
-    <label>Kategori Adı</label>
-    <input type="text" name="CategoryName" class="form-control" placeholder="KategoriAdı.." required/>
-    <br />
-    <label>Kategori Açıklama</label>
-    <input type="text" name="CategoryDescription" class="form-control"  placeholder="KategoriAçıklama.." required />
-    <br />
-    <input type="submit" class="btn btn-primary" value="Kaydet" /> 
-</form>
+@using (Html.BeginForm("AddCategory", "Category", FormMethod.Post))
+{
+    <div class="form-group col-lg-12">
+        @Html.Label("Kategori Adı")
+        @Html.TextBoxFor(x=>x.CategoryName , new {@class="form-control" })
+        @Html.ValidationMessageFor(x=>x.CategoryName)
+        <br />
+        @Html.Label("Açıklama")
+        @Html.TextBoxFor(x=>x.CategoryDescription, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x=>x.CategoryDescription)
+        <br />
+        <button class="btn btn-info">Kategoriyi Kaydet</button>
+    </div>
+}
+
+
+@*<form class="form-group" method="post">
+        <label>Kategori Adı</label>
+        <input type="text" name="CategoryName" class="form-control" placeholder="KategoriAdı.." required/>
+        <br />
+        <label>Kategori Açıklama</label>
+        <input type="text" name="CategoryDescription" class="form-control"  placeholder="KategoriAçıklama.." required />
+        <br />
+        <input type="submit" class="btn btn-primary" value="Kaydet" />
+    </form>*@

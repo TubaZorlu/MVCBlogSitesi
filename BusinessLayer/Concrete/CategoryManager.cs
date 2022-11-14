@@ -17,7 +17,7 @@ namespace BusinessLayer.Concrete
 
         public void TDelete(Category t)
         {
-            throw new System.NotImplementedException();
+            _categoryDal.Delete(t);
         }
 
         public Category TGetByID(int id)
@@ -32,7 +32,7 @@ namespace BusinessLayer.Concrete
 
         public void TInsert(Category t)
         {
-            throw new System.NotImplementedException();
+            _categoryDal.Insert(t);
         }
 
         public void TUpdate(Category t)

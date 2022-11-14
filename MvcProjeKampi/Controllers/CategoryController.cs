@@ -1,5 +1,9 @@
-﻿using BusinessLayer.Abstract; 
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.ValidationRules;
+using EntityLayer.Concrete;
+using FluentValidation.Results;
 using System.Web.Mvc;
+
 
 namespace MvcProjeKampi.Controllers
 {
@@ -23,10 +27,35 @@ namespace MvcProjeKampi.Controllers
             return View(categoryValues);
         }
 
+
         [HttpGet]
         public ActionResult AddCategory()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddCategory(Category category)
+        {
+
+            CategoryValidator categoryValidator = new CategoryValidator();
+            ValidationResult result = categoryValidator.Validate(category);
+
+            if (result.IsValid)
+            {
+                _categoryService.TInsert(category);
+                return RedirectToAction("GetCategoryList");
+            }
+
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+            }
+            return View();
+
         }
 
     }
