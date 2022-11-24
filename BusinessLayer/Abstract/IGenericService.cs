@@ -9,5 +9,8 @@ namespace BusinessLayer.Abstract
         void TUpdate(T t);
         List<T> TGetList();
         T TGetByID(int id);
+
+        // farklı bir method id alımı için 
+        T GetId(int id);
     }
 }

@@ -21,13 +21,28 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public void Delete(T p)
         {
-            entity.Remove(p);
+            var deletedEntity = c.Entry(p);
+            deletedEntity.State = EntityState.Deleted;
+            //entity.Remove(p);
             c.SaveChanges();
+        }
+
+        // getbyid için farklı bir yöntem
+        public T Get(Expression<Func<T, bool>> filter)
+        {
+            return entity.SingleOrDefault(filter);
+        }
+
+        public T GetById(int id)
+        {
+            return entity.Find(id);
         }
 
         public void Insert(T p)
         {
-            entity.Add(p);
+            var addEntity = c.Entry(p);
+            addEntity.State = EntityState.Added;
+            //entity.Add(p);
             c.SaveChanges();
 
         }
@@ -44,6 +59,10 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public void Update(T p)
         {
+            // bu kod çalışmadı
+           
+            //var updatedentiy = c.Entry(p);
+            //updatedentiy.State = EntityState.Modified;
             c.SaveChanges();
         }
     }
