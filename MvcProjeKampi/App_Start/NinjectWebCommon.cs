@@ -13,6 +13,7 @@ namespace MvcProjeKampi.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using BusinessLayer.Abstract;
+    using DataAccessLayer.Concrete.EntityFramework;
 
     public static class NinjectWebCommon 
     {
@@ -50,6 +51,30 @@ namespace MvcProjeKampi.App_Start
 
                 kernel.Bind<ICategoryService>().To<CategoryManager>().InSingletonScope();
                 kernel.Bind<ICategoryDal>().To<EFCategoryDal>().InSingletonScope();
+
+                kernel.Bind<IWriterService>().To<WriterManager>().InSingletonScope();
+                kernel.Bind<IWriterDal>().To<EFWriterDal>().InSingletonScope();
+
+                kernel.Bind<IHeadingService>().To<HeadingManager>().InSingletonScope();
+                kernel.Bind<IHeadingDal>().To<EFHeadingDal>().InSingletonScope();
+
+                kernel.Bind<IContentService>().To<ContentManager>().InSingletonScope();
+                kernel.Bind<IContentDal>().To<EFContentDal>().InSingletonScope();
+
+                kernel.Bind<IAboutService>().To<AboutManager>().InSingletonScope();
+                kernel.Bind<IAboutDal>().To<EFAboutDal>().InSingletonScope();
+
+                kernel.Bind<IContactService>().To<ContactManager>().InSingletonScope();
+                kernel.Bind<IContactDal>().To<EFContactDal>().InSingletonScope();
+
+                kernel.Bind<IMessageService>().To<MessageManager>().InSingletonScope();
+                kernel.Bind<IMessageDal>().To<EFMessageDal>().InSingletonScope();
+
+                kernel.Bind<IImageFileService>().To<ImageFileManager>().InSingletonScope();
+                kernel.Bind<IImageFileDal>().To<EFImageFileDal>().InSingletonScope();
+
+                kernel.Bind<IAdminService>().To<AdminManager>().InSingletonScope();
+                kernel.Bind<IAdminDal>().To<EFAdminDal>().InSingletonScope();
 
                 RegisterServices(kernel);
                 return kernel;

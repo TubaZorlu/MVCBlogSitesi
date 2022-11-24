@@ -14,6 +14,13 @@ namespace BusinessLayer.Concrete
         {
             _categoryDal = categoryDal;
         }
+        
+        //getby id linq sorgusu ile bulma
+
+        public Category GetId(int id)
+        {
+            return _categoryDal.Get(x => x.CategoryID == id);
+        }
 
         public void TDelete(Category t)
         {
@@ -22,7 +29,7 @@ namespace BusinessLayer.Concrete
 
         public Category TGetByID(int id)
         {
-            throw new System.NotImplementedException();
+            return _categoryDal.GetById(id);
         }
 
         public List<Category> TGetList()
@@ -37,7 +44,7 @@ namespace BusinessLayer.Concrete
 
         public void TUpdate(Category t)
         {
-            throw new System.NotImplementedException();
+            _categoryDal.Update(t);
         }
     }
 }

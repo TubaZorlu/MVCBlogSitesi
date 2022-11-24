@@ -21,7 +21,20 @@ namespace DataAccessLayer.Concrete
         public DbSet<Content> Contents { get; set; }
         public DbSet<Heading> Headings { get; set; }
         public DbSet<Writer> Writers { get; set; }
+        public DbSet<Meassage> Meassages { get; set; }
+        public DbSet<ImageFile> ImageFiles { get; set; }
+        public DbSet<Admin> Admins { get; set; }
 
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Heading>().HasRequired(x=>x.Category).WithMany(x=>x.Headings).HasForeignKey(x => x.CategoryID);
+            modelBuilder.Entity<Heading>().HasRequired(x=>x.Writer).WithMany(x=>x.Headings).HasForeignKey(x => x.WriterID);
+
+            modelBuilder.Entity<Content>().HasRequired(x=>x.Heading).WithMany(x=>x.Contents).HasForeignKey(x => x.HeadingID);
+   
+
+        }
 
     }
 }
