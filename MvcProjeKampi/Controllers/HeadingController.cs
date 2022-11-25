@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MvcProjeKampi.Controllers
 {
-    [Authorize]
+   
     public class HeadingController : Controller
     {
         IHeadingService _headingService;

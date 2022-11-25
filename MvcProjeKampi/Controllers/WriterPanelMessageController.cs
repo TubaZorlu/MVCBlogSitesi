@@ -14,10 +14,11 @@ namespace MvcProjeKampi.Controllers
     public class WriterPanelMessageController : Controller
     {
         private readonly IMessageService _messageService;
-
-        public WriterPanelMessageController(IMessageService messageService)
+        private readonly Context _context;
+        public WriterPanelMessageController(IMessageService messageService, Context context)
         {
             _messageService = messageService;
+            _context = context;
         }
         public ActionResult Index()
         {
@@ -27,7 +28,8 @@ namespace MvcProjeKampi.Controllers
 
         public ActionResult Inbox()
         {
-            var messageList = _messageService.TGetlistInbox();
+            string girisYapankullanini = (string)Session["WriterMail"];
+            var messageList = _context.Meassages.Where(x => x.ReceiverMail == girisYapankullanini).ToList();           
             return View(messageList);
         }
 
@@ -40,7 +42,8 @@ namespace MvcProjeKampi.Controllers
 
         public ActionResult Sendbox()
         {
-            var messageList = _messageService.TGetlistSendbox();
+            string girisYapankullanini = (string)Session["WriterMail"];
+            var messageList = _context.Meassages.Where(x => x.SenderMail == girisYapankullanini).ToList();
             return View(messageList);
         }
 

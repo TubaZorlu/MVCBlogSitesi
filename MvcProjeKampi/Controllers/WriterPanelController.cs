@@ -14,33 +14,32 @@ namespace MvcProjeKampi.Controllers
     {
         private readonly IHeadingService _headingService;
         private readonly ICategoryService _CategoryService;
+        private readonly Context _context;
 
-        public WriterPanelController(IHeadingService headingService, ICategoryService categoryService)
+
+        public WriterPanelController(IHeadingService headingService, ICategoryService categoryService, Context context)
         {
             _headingService = headingService;
             _CategoryService = categoryService;
-        }
-
-        public ActionResult WriterProfile()
-        {
-            return View();
+            _context = context;
         }
 
         int girisYapanId;
+        public ActionResult WriterProfile()
+        {
+            
+
+
+            return View();
+        }
+
+   
         public ActionResult MyHeading()
         {
-            string girisYapankullanini = (string)Session["WriterMail"];
-
-            var context = new Context();
-
-             girisYapanId = context.Writers.Where(x => x.WriterMail == girisYapankullanini).Select(x => x.WriterID).FirstOrDefault();
-            var values = _headingService.TGetListByWriter(girisYapanId);
-           
-
+            string girisYapankullanini = (string)Session["WriterMail"];  
+            girisYapanId = _context.Writers.Where(x => x.WriterMail == girisYapankullanini).Select(x => x.WriterID).FirstOrDefault();
+            var values = _context.Headings.Where(x => x.WriterID == girisYapanId && x.HeadingStatus==true).ToList();
             return View(values);
-
-
-
 
         }
 
@@ -62,6 +61,9 @@ namespace MvcProjeKampi.Controllers
         [HttpPost]
         public ActionResult NewHeading(Heading heading)
         {
+            string girisYapankullanini = (string)Session["WriterMail"];
+            girisYapanId = _context.Writers.Where(x => x.WriterMail == girisYapankullanini).Select(x => x.WriterID).FirstOrDefault();
+
             heading.HeadingDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             heading.WriterID = girisYapanId;
             heading.HeadingStatus = true;
@@ -93,15 +95,13 @@ namespace MvcProjeKampi.Controllers
         [HttpPost]
         public ActionResult EditHeading(Heading heading)
         {
+            
             var headingValue = _headingService.TGetByID(heading.HeadingID);
-
             headingValue.HeadingName = heading.HeadingName;
             headingValue.CategoryID = heading.CategoryID;
             headingValue.HeadingDate = headingValue.HeadingDate;
-            headingValue.WriterID = headingValue.WriterID;
-            heading.WriterID = girisYapanId;
+            headingValue.WriterID = headingValue.WriterID;       
             _headingService.TUpdate(headingValue);
-
             return RedirectToAction("MyHeading");
 
 

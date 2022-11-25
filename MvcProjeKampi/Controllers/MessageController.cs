@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
 using System;
@@ -10,18 +11,22 @@ using System.Web.Mvc;
 
 namespace MvcProjeKampi.Controllers
 {
-    [Authorize]
+   
     public class MessageController : Controller
     {
         private readonly IMessageService _messageService;
+        private readonly Context _context;
 
-        public MessageController(IMessageService messageService)
+
+        public MessageController(IMessageService messageService, Context context)
         {
             _messageService = messageService;
+            _context = context;
         }
 
         public ActionResult Inbox()
         {
+
             var messageList = _messageService.TGetlistInbox();
             return View(messageList);
         }

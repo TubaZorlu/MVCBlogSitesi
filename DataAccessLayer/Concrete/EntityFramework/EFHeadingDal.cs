@@ -18,10 +18,8 @@ namespace DataAccessLayer.Concrete.EntityFramework
 
             using (var context = new Context())
             {
-                var giris = context.Headings.Where(x => x.WriterID == id && x.HeadingStatus==true).ToList();
-
-                return giris;
-
+                return context.Headings.Where(x => x.Writer.WriterID == id).ToList();
+              
             }
         }
     }

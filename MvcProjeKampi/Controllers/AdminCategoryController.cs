@@ -11,18 +11,18 @@ using System.Web.Mvc;
 
 namespace MvcProjeKampi.Controllers
 {
-    [Authorize(Roles ="A")]
+    
     public class AdminCategoryController : Controller
     {
         ICategoryService _categoryService;
-        
+
 
         public AdminCategoryController(ICategoryService categoryService)
         {
             _categoryService = categoryService;
         }
 
-     
+        [Authorize]
         public ActionResult Index()
         {
             var values = _categoryService.TGetList();
@@ -80,7 +80,7 @@ namespace MvcProjeKampi.Controllers
             var values = _categoryService.TGetByID(category.CategoryID);
             values.CategoryName = category.CategoryName;
             values.CategoryDescription = category.CategoryDescription;
-            values.CategoryStatus = true;           
+            values.CategoryStatus = true;
             _categoryService.TUpdate(category);
             return RedirectToAction("Index");
         }
