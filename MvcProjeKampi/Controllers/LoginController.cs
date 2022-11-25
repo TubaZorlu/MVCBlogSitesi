@@ -10,6 +10,7 @@ using System.Web.Security;
 
 namespace MvcProjeKampi.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly IAdminService _adminService;
@@ -22,6 +23,7 @@ namespace MvcProjeKampi.Controllers
             _writerService = writerService;
         }
 
+     
         public ActionResult Index()
         {
             return View();
@@ -43,7 +45,7 @@ namespace MvcProjeKampi.Controllers
             return View();
         }
 
-        [HttpGet]
+
         public ActionResult WriterLogin()
         {
             return View();
@@ -64,7 +66,7 @@ namespace MvcProjeKampi.Controllers
                     FormsAuthentication.SetAuthCookie(UserInfo.WriterMail, false);
                     Session["WriterMail"] = UserInfo.WriterMail;
                     
-                    return RedirectToAction("MyHeading", "WriterPanel");
+                    return RedirectToAction("WriterProfile", "WriterPanel");
                 }
 
             }

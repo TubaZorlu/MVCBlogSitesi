@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace MvcProjeKampi.Controllers
 {
-    [Authorize]
+ 
     public class GaleryController : Controller
     {
         IImageFileService imageFileService;

@@ -9,11 +9,10 @@ using System.Web.Mvc;
 
 namespace MvcProjeKampi.Controllers
 {
-    [Authorize]
+  
     public class ContactController : Controller
     {
         private readonly IContactService _contactService;
-
         ContactValidator validationRules = new ContactValidator();
 
         public ContactController(IContactService contactService)
@@ -23,7 +22,6 @@ namespace MvcProjeKampi.Controllers
 
         public ActionResult Index()
         {
-
 
             var contactValues = _contactService.TGetList();
             return View(contactValues);

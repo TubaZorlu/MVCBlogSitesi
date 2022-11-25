@@ -11,7 +11,7 @@ namespace DataAccessLayer.Concrete
     public class Context : DbContext
     {
 
-        public Context(): base("Server=DESKTOP-CJELTSN\\MSSQLSERVER2019;Database=DbMvcProjeKampi;Uid=sa;Pwd=1234")
+        public Context() : base("Server=DESKTOP-CJELTSN\\MSSQLSERVER2019;Database=DbMvcProjeKampi;Uid=sa;Pwd=1234")
         {
 
         }
@@ -26,15 +26,15 @@ namespace DataAccessLayer.Concrete
         public DbSet<Admin> Admins { get; set; }
 
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Heading>().HasRequired(x=>x.Category).WithMany(x=>x.Headings).HasForeignKey(x => x.CategoryID);
-            modelBuilder.Entity<Heading>().HasRequired(x=>x.Writer).WithMany(x=>x.Headings).HasForeignKey(x => x.WriterID);
-
-            modelBuilder.Entity<Content>().HasRequired(x=>x.Heading).WithMany(x=>x.Contents).HasForeignKey(x => x.HeadingID);
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Heading>().HasRequired(x=>x.Category).WithMany(x=>x.Headings).HasForeignKey(x => x.CategoryID);
+        //    modelBuilder.Entity<Heading>().HasRequired(x=>x.Writer).WithMany(x=>x.Headings).HasForeignKey(x => x.WriterID);
+        //    modelBuilder.Entity<Content>().HasRequired(x=>x.Heading).WithMany(x=>x.Contents).HasForeignKey(x => x.HeadingID);
+        //    modelBuilder.Entity<Content>().HasRequired(x=>x.Writer).WithMany(x=>x.Contents).HasForeignKey(x => x.WriterID);
    
 
-        }
+        //}
 
     }
 }

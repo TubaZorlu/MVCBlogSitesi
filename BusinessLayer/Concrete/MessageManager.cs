@@ -6,12 +6,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BusinessLayer.Concrete
 {
     public class MessageManager : IMessageService
     {
-       private readonly IMessageDal _messageDal;
+ 
+
+        private readonly IMessageDal _messageDal;
 
         public MessageManager(IMessageDal messageDal)
         {
@@ -45,6 +48,7 @@ namespace BusinessLayer.Concrete
 
         public List<Meassage> TGetlistSendbox()
         {
+           
             return _messageDal.GetlistSendbox();
         }
 
