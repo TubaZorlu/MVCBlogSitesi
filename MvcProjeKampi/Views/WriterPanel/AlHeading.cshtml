@@ -1,14 +1,13 @@
 ﻿@model List<EntityLayer.Concrete.Heading>
 @{
-    ViewBag.Title = "MyHeading";
+    ViewBag.Title = "AlHeading";
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
-    int sayac = 1;
 }
 
 @{string color = ""; }
 
 <!DOCTYPE html>
-<html> 
+<html>
 
 <body class="hold-transition sidebar-mini">
 
@@ -55,7 +54,7 @@
                             <th style="width: 15%">
                                 Oluşturan Yazar
                             </th>
-                           
+
 
                             <th style="width: 15%" class="text-center">
                                 Kategori
@@ -94,55 +93,50 @@
                             }
 
 
-                        <tr>
-                            <td>
-                                @sayac
-                            </td>
-                            <td>
-                                <a>
-                                    @item.HeadingName
-                                </a>
-                                <br />
-                                <small>
-                                    @(((DateTime)item.HeadingDate).ToString("dd-MMM-yyyy"))
-                                </small>
-                            </td>
-                            <td>
-                                <ul class="list-inline">
-                                    <li class="list-inline-item">
-                                        <img alt="Avatar" class="table-avatar" src="@item.Writer.WriterImage">
-                                    </li>
-
-                                </ul>
-                            </td>
-                        
-
-
-                            <td class="project-state">
-
-                                <span class="@color">@item.Category.CategoryName</span>
-                            </td>
-                            <td class="project-actions text-right" style="display:flex;gap:15px">
-                                <a class="btn btn-primary btn-sm" href="/WriterPanelContent/MyContent/@item.HeadingID">
-                                    <i class="fas fa-folder">
-                                    </i>
-                                    Yazılar
-                                </a>
-                                <a class="btn btn-info btn-sm" href="/WriterPanel/EditHeading/@item.HeadingID ">
-                                    <i class="fas fa-pencil-alt">
-                                    </i>
-                                    Düzenle
-                                </a>
-                                                             
-                                    <a class="btn btn-danger btn-sm" href="/WriterPanel/DeleteHeading/@item.HeadingID">
-                                        <i class="fas fa-adjust"></i>
-                                        Sil
+                            <tr>
+                                <td>
+                                    @item.HeadingID
+                                </td>
+                                <td>
+                                    <a>
+                                        @item.HeadingName
                                     </a>
-                                      
-                            </td>
-                        </tr>
+                                    <br />
+                                    <small>
+                                        @(((DateTime)item.HeadingDate).ToString("dd-MMM-yyyy"))
+                                    </small>
+                                </td>
+                                <td>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">
+                                            <img alt="Avatar" class="table-avatar" src="@item.Writer.WriterImage">
+                                        </li>
 
-                            sayac++;
+                                    </ul>
+                                </td>
+
+
+
+                                <td class="project-state">
+
+                                    <span class="@color">@item.Category.CategoryName</span>
+                                </td>
+                                <td class="project-actions text-right" style="display:flex;gap:15px">
+                                    <a class="btn btn-primary btn-sm" href="/Default/Headings/@item.HeadingID">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Yazılar
+                                    </a>
+                                    <a class="btn btn-info btn-sm" href="/WriterPanelContent/AddContent/@item.HeadingID ">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Bu Başlığa Yaz
+                                    </a>
+
+                                  
+
+                                </td>
+                            </tr>
                         }
 
 
@@ -162,5 +156,5 @@
 </body>
 </html>
 
-<a href="/WriterPanel/NewHeading/" class=" btn btn-primary">Yeni Başlık Girişi</a>
+
 
