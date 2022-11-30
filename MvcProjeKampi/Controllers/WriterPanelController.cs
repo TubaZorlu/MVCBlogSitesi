@@ -116,5 +116,13 @@ namespace MvcProjeKampi.Controllers
             _headingService.TUpdate(headingValue);
             return RedirectToAction("MyHeading");
         }
+
+
+        public ActionResult AlHeading() 
+        {
+            var headigs = _headingService.TGetList();
+
+            return View(headigs);
+        }
     }
 }
