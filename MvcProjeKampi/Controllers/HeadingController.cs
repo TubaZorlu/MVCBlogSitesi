@@ -108,6 +108,12 @@ namespace MvcProjeKampi.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult HeadingReport() 
+        {
+            var values = _headingService.TGetList();
+            return View(values);
+        }
+
 
     }
 }

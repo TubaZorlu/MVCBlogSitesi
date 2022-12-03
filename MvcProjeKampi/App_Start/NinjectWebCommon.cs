@@ -76,6 +76,8 @@ namespace MvcProjeKampi.App_Start
                 kernel.Bind<IAdminService>().To<AdminManager>().InSingletonScope();
                 kernel.Bind<IAdminDal>().To<EFAdminDal>().InSingletonScope();
 
+                kernel.Bind<IWriterloginService>().To<WriterLoginManager>().InSingletonScope();
+
                 RegisterServices(kernel);
                 return kernel;
             }

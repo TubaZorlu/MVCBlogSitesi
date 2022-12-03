@@ -15,15 +15,17 @@ namespace MvcProjeKampi.Controllers
     {
         private readonly IAdminService _adminService;
         private readonly IWriterService _writerService;
+        private readonly IWriterloginService _writerloginService;
 
 
-        public LoginController(IAdminService adminService, IWriterService writerService)
+        public LoginController(IAdminService adminService, IWriterService writerService, IWriterloginService writerloginService)
         {
             _adminService = adminService;
             _writerService = writerService;
+            _writerloginService = writerloginService;
         }
 
-     
+
         public ActionResult Index()
         {
             return View();
@@ -57,27 +59,26 @@ namespace MvcProjeKampi.Controllers
         {
 
 
-            using (var context = new Context()) 
+            //var UserInfo = context.Writers.Where(x => x.WriterMail == writer.WriterMail && x.WriterPassword == writer.WriterPassword).FirstOrDefault();
+
+            var UserInfo = _writerloginService.GetWriter(writer.WriterMail, writer.WriterPassword);
+
+
+            if (UserInfo != null)
             {
-                var UserInfo = context.Writers.Where(x => x.WriterMail == writer.WriterMail && x.WriterPassword == writer.WriterPassword).FirstOrDefault();
+                FormsAuthentication.SetAuthCookie(UserInfo.WriterMail, false);
+                Session["WriterMail"] = UserInfo.WriterMail;
 
-                if (UserInfo != null)
-                {
-                    FormsAuthentication.SetAuthCookie(UserInfo.WriterMail, false);
-                    Session["WriterMail"] = UserInfo.WriterMail;
-                    
-                    return RedirectToAction("WriterProfile", "WriterPanel");
-                }
-
+                return RedirectToAction("AlHeading", "WriterPanel");
             }
 
             ViewBag.HataliGiris = 1;
             return View();
-           
+
         }
 
 
-        public ActionResult LogOut() 
+        public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
             Session.Abandon();
@@ -85,6 +86,8 @@ namespace MvcProjeKampi.Controllers
             return RedirectToAction("Headings", "Default");
 
         }
+
+      
 
 
     }

@@ -38,6 +38,11 @@ namespace BusinessLayer.Concrete
             return _contentDal.List();
         }
 
+        public List<Content> TGetListAll(string p)
+        {
+            return _contentDal.GetListAll(p);
+        }
+
         public List<Content> TGetListByHeadingId(int id)
         {
             return _contentDal.GetListByHeadingId(id);

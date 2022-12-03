@@ -1,7 +1,9 @@
 ﻿using BusinessLayer.Abstract;
+using DataAccessLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,9 +14,12 @@ namespace MvcProjeKampi.Controllers
     {
        private readonly IContentService _contentService;
 
-        public ContentController(IContentService contentService)
+        private readonly Context _context;
+
+        public ContentController(IContentService contentService, Context context)
         {
             _contentService = contentService;
+            _context = context;
         }
 
         public ActionResult Index()
@@ -27,5 +32,19 @@ namespace MvcProjeKampi.Controllers
            var values= _contentService.TGetListByHeadingId(id);
             return View(values);
         }
+
+
+        public ActionResult GetAllContent(string p)
+        {
+            if (p==null)
+            {
+                var values1 = _contentService.TGetList();
+                return View(values1.ToList()); ;
+            }
+
+            var values = _contentService.TGetListAll(p);
+            return View(values.ToList()); ;
+        }
+
     }
 }
