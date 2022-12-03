@@ -1,3 +1,3 @@
 # MVCBlogSitesi
-Bu  projemde katmanlı mimari,repository dizayn pattern ve dependecy injection için Ninject kullandım .
+Bu  projemde katmanlı mimari,repository dizayn pattern ve Inversion Of Control  için Ninject kullandım .
 
