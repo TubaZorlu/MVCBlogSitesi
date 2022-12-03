@@ -1,7 +1,11 @@
-﻿@model List<EntityLayer.Concrete.Heading>
+﻿
+@model PagedList.IPagedList<EntityLayer.Concrete.Heading>
+@using PagedList
+@using PagedList.Mvc
 @{
     ViewBag.Title = "AlHeading";
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
+    int sayac = 0;
 }
 
 @{string color = ""; }
@@ -66,6 +70,8 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
+                            sayac++;
+
                             if (item.CategoryID == 2)
                             {
                                 color = "badge badge-warning";
@@ -95,7 +101,7 @@
 
                             <tr>
                                 <td>
-                                    @item.HeadingID
+                                    @sayac
                                 </td>
                                 <td>
                                     <a>
@@ -133,7 +139,7 @@
                                         Bu Başlığa Yaz
                                     </a>
 
-                                  
+
 
                                 </td>
                             </tr>
@@ -155,6 +161,15 @@
 
 </body>
 </html>
+
+<!-- sayfalama için aşağıdaki kod eklendi, pagedlistrender komutu ile sayfalama da css düzenlemiş oluyoruz -->
+
+@Html.PagedListPager((IPagedList)Model, p => Url.Action("AlHeading", new { p }), new PagedListRenderOptions
+{
+
+    LiElementClasses = new List<string> { "page-link" }
+
+})
 
 
 

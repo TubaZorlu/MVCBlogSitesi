@@ -10,5 +10,6 @@ namespace BusinessLayer.Abstract
    public interface IContentService:IGenericService<Content>
     {
         List<Content> TGetListByHeadingId(int id);
+        List<Content> TGetListAll(string p);
     }
 }

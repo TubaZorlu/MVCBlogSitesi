@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface IContentDal : IRepository<Content>
     {
         List<Content> GetListByHeadingId(int id);
+        List<Content> GetListAll(string p);
     }
 }
